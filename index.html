@@ -6,20 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js"></script>
+    <script defer src="main.js"></script>
 </head>
 <body>
-    <header></header>
+    <div class="sidebar">
+        <form action="#" id="form-1">
+            <fieldset>
+                <legend>Player 1</legend>
+                <label for="name">Name:</label>
+                <input type="text" id="name-1" name="name"><br><br>
+                <label for="letter">Choose letter:</label>
+                <select name="letter" id="letter-1">
+                    <option value="X">X</option>
+                    <option value="O">O</option>
+                </select>
+                <button>Submit</button>
+            </fieldset>
+        </form>
+        <p class="player-1">Player1: <span class="player-1-name"></span></p>
+        <form action="#" id="form-2">
+            <fieldset>
+                <legend>Player 2</legend>
+                <label for="name">Name:</label>
+                <input type="text" id="name-2" name="name"><br><br>
+                <label for="letter">Choose letter:</label>
+                <select name="letter" id="letter-2">
+                    <option value="X">X</option>
+                    <option value="O">O</option>
+                </select>
+                <button>Submit</button>
+            </fieldset>
+        </form>
+        <p class="player-2">Player2: <span class="player-2-name"></span></p>
+        <dialog>
+            Ahmed wins
+        </dialog>
+    </div>
     <main>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-1"></div>
+        <div>Player 1 turn</div>
+        <br>
+        <div class="board"></div>
     </main>
 </body>
 </html>

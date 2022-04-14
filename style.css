@@ -1,17 +1,28 @@
 body {
-    height: 100vh;
+    box-sizing: border-box;
+    /* margin: 0; */
+    height: 95vh;
     display: flex;
-    justify-content: center;
+    /* justify-content: space-between; */
 }
 
-main {
+.sidebar {
+    margin-right: 6rem;
+}
+
+main .board{
     display: grid;
     width: 60%;
     height: 60%;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(100px, 140px));
     grid-template-rows: repeat(3, 1fr);
+    font-size: xx-large;
+    text-align: center;
 }
 
 .cell {
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
