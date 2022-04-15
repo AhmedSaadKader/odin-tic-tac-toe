@@ -10,6 +10,10 @@ body {
     margin-right: 6rem;
 }
 
+fieldset {
+    margin-top: 2rem;
+}
+
 main .board{
     display: grid;
     width: 60%;
@@ -21,8 +25,13 @@ main .board{
 }
 
 .cell {
-    border: 1px solid black;
+    border: 1px dotted black;
+    /* border-bottom: none; */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.hidden {
+    display: none;
 }

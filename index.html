@@ -15,35 +15,38 @@
                 <legend>Player 1</legend>
                 <label for="name">Name:</label>
                 <input type="text" id="name-1" name="name"><br><br>
-                <label for="letter">Choose letter:</label>
+                <!-- <label for="letter">Choose letter:</label>
                 <select name="letter" id="letter-1">
                     <option value="X">X</option>
                     <option value="O">O</option>
-                </select>
+                </select> -->
                 <button>Submit</button>
             </fieldset>
         </form>
-        <p class="player-1">Player1: <span class="player-1-name"></span></p>
+        <div id="player-1-display"></div>
         <form action="#" id="form-2">
             <fieldset>
                 <legend>Player 2</legend>
                 <label for="name">Name:</label>
                 <input type="text" id="name-2" name="name"><br><br>
-                <label for="letter">Choose letter:</label>
+                <!-- <label for="letter">Choose letter:</label>
                 <select name="letter" id="letter-2">
                     <option value="X">X</option>
                     <option value="O">O</option>
-                </select>
+                </select> -->
                 <button>Submit</button>
             </fieldset>
         </form>
-        <p class="player-2">Player2: <span class="player-2-name"></span></p>
+        <div id="player-2-display"></div>
+        <button class="hidden" id="play-game">Play</button>
         <dialog>
-            Ahmed wins
+            <h2 id="winner-announce"></h2>
+            <button id="play-again">Play Again</button>
+            <button id="new-game">New Game</button>
         </dialog>
     </div>
     <main>
-        <div>Player 1 turn</div>
+        <div></div>
         <br>
         <div class="board"></div>
     </main>
