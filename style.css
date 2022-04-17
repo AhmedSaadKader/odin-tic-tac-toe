@@ -3,7 +3,6 @@ body {
     /* margin: 0; */
     height: 95vh;
     display: flex;
-    /* justify-content: space-between; */
 }
 
 .sidebar {
@@ -12,26 +11,65 @@ body {
 
 fieldset {
     margin-top: 2rem;
+    border: none;
+}
+
+legend {
+    margin-bottom: 1rem;
+}
+
+main {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.player-display {
+    border-bottom: 1px solid black;
+    width: 250px;
+    margin-bottom: 2rem;
+}
+
+.player-display > p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-display > p > h4{
+    margin: auto auto;
+}
+
+.player-display > h4  {
+    margin-bottom: 1rem;
 }
 
 main .board{
     display: grid;
-    width: 60%;
+    margin: auto;
     height: 60%;
     grid-template-columns: repeat(3, minmax(100px, 140px));
     grid-template-rows: repeat(3, 1fr);
     font-size: xx-large;
     text-align: center;
+    background-color: black;
+    gap: 1px;
 }
 
 .cell {
-    border: 1px dotted black;
-    /* border-bottom: none; */
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2em;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .hidden {
     display: none;
+}
+
+dialog {
+    background-color: rgba(205, 133, 63, 0.8);
+    width: 200px;
+    top: 120px;
+    color: white
 }
