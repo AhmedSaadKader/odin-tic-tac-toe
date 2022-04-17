@@ -16,7 +16,7 @@
                 <label for="name">Name:</label>
                 <input type="text" id="name-1" name="name"><br><br>
 
-                <label for="playerType">Choose Player:</label>
+                <label for="playerType">Player Type:</label>
                 <select name="playerType" id="playerType">
                     <option value="Human">Human</option>
                     <option value="AI">AI</option>
@@ -31,7 +31,7 @@
                 <legend>Player 2</legend>
                 <label for="name">Name:</label>
                 <input type="text" id="name-2" name="name"><br><br>
-                <label for="playerType">Choose Player:</label>
+                <label for="playerType">Player Type:</label>
                 <select name="playerType" id="playerType">
                     <option value="Human">Human</option>
                     <option value="AI" selected>AI</option>
@@ -49,9 +49,12 @@
         </dialog>
     </div>
     <main>
+        <Header>
+            <h2>Tic Tac Toe</h2>
+        </Header>
         <div></div>
         <br>
-        <div class="board"></div>
+        <div class="board" id="board"></div>
     </main>
 </body>
 </html>

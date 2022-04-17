@@ -3,10 +3,39 @@ body {
     /* margin: 0; */
     height: 95vh;
     display: flex;
+    background-color: #4070f4;
+    /* color: white; */
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 30px;
+    background-color: #5c0c0c;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+header h2 {
+    text-align: center;
+    color: white;
 }
 
 .sidebar {
     margin-right: 6rem;
+    margin-left: 2rem;
+    /* background-color: white; */
+    color: white;
+    font-size: 1.25rem;
+    padding: 0.75rem;
+}
+
+input {
+    border-radius: 20px;
+    padding: 0.5rem;
+    border: .3px solid grey;
 }
 
 fieldset {
@@ -16,6 +45,9 @@ fieldset {
 
 legend {
     margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-family: sans-serif;
 }
 
 main {
@@ -50,8 +82,11 @@ main .board{
     grid-template-rows: repeat(3, 1fr);
     font-size: xx-large;
     text-align: center;
-    background-color: black;
     gap: 1px;
+}
+
+.active {
+    background-color: black;
 }
 
 .cell {
@@ -71,5 +106,10 @@ dialog {
     background-color: rgba(205, 133, 63, 0.8);
     width: 200px;
     top: 120px;
-    color: white
+    color: white;
+    text-align: center
+}
+
+dialog button {
+    margin-bottom: 0.5rem;
 }
