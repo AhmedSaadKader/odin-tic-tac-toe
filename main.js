@@ -33,22 +33,35 @@ const Gameboard = (() => {
             cell8 = document.getElementById('cell-8')
         }
     }
-    const play = () => {
+    const decideTurn = () => {
         if (clickBoardCounter < 9) {
             clickBoardCounter % 2 == 0 ? turn = 'X' : turn = 'O'
             return turn
         } else { return }
     }
 
-    const randomCompMove = () => {
-        getEmptyCells()
-        const randomMove = emptyCells[Math.floor(Math.random() * emptyCells.length)]
-        if (randomMove) {
-            if (checkWin != 'Ok') {
-                randomMove.innerHTML = 'O'
-                randomMove.dataset.letter = 'O'
-            }
+    const randomCompMove = (Player1, Player2) => {
+        let bestScore = -Infinity
+        let bestMove;
+        for (let index = 0; index < cells.length; index++){
+            if (cells[index].innerHTML == ''){
+                decideTurn()
+                cells[index].dataset.letter = turn
+                cells[index].innerHTML = turn
+                clickBoardCounter++
+                let score = minimax(cells, emptyCells.length, false)
+                cells[index].removeAttribute('data-letter')
+                cells[index].innerHTML = ''
+                decideTurn()
+                clickBoardCounter --
+                if (score > bestScore) {
+                    bestScore = Math.max(score, bestScore)
+                    bestMove = cells[index]
+                }
+            }         
         }
+        displayMove(bestMove, turn)  
+
     }
 
     const getEmptyCells = () => {
@@ -62,30 +75,58 @@ const Gameboard = (() => {
         return emptyCells
     }
 
-    const minimax = (cells, arraylength, Player) => {
-        getEmptyCells()
-        let position = cells
-        console.log(arraylength, position)
+    let scores = {
+        X : -1,
+        O : 1,
+        Tie : 0
+    }
 
-        if (arraylength == 0){
-            console.log('game over')
-            return 'game over'
+    const minimax = (cells, arraylength, isMaximizing) => {
+        let result = checkWin()
+        console.log(result)
+        if (result) {
+            let score = scores[result]
+            console.log(score)
+            return score
         }
-        else if (Player.type == 'AI'){
-            console.log('hihi')
-            let maxEval = -Infinity;
-            position.forEach(cell => {
-                if(Player.letter == "O"){
-                    console.log(cell)
-                    cell.innerHTML = "O"
-                    minimax()
+        if (isMaximizing) {
+            let bestScore = -Infinity
+            for (let index = 0; index < cells.length; index++){
+                if (cells[index].innerHTML == ''){
+                    decideTurn()
+                    cells[index].dataset.letter = turn
+                    cells[index].innerHTML = turn
+                    clickBoardCounter ++
+                    let score = minimax(cells, emptyCells.length, false)
+                    cells[index].removeAttribute('data-letter')
+                    cells[index].innerHTML = ''
+                    decideTurn()
+                    clickBoardCounter --
+                    bestScore = Math.max(score, bestScore)
+
                 }
-                if(checkWin(Player1, Player2, position) == 'OK') {
-                    console.log('xx')
-                    return 
+            }
+            console.log(bestScore)
+            return bestScore
+        }
+        if (!isMaximizing) {
+            let bestScore = Infinity
+            for (let index = 0; index < cells.length; index++){
+                if (cells[index].innerHTML == ''){
+                    decideTurn()
+                    cells[index].dataset.letter = turn
+                    cells[index].innerHTML = turn
+                    clickBoardCounter ++
+                    let score = minimax(cells, cells.length, true)
+                    cells[index].removeAttribute('data-letter')
+                    cells[index].innerHTML = ''
+                    bestScore = Math.min(score, bestScore)
+                    decideTurn()
+                    clickBoardCounter --
                 }
-            })
-            
+            }
+            console.log(bestScore)
+            return bestScore
         }
     }
 
@@ -93,7 +134,7 @@ const Gameboard = (() => {
 
     }
 
-    const checkWin = (Player1, Player2, cells) => {
+    const checkWin = () => {
         cells = document.querySelectorAll('.cell')
         if (
             (cell0.dataset.letter == cell1.dataset.letter && cell1.dataset.letter == cell2.dataset.letter && cell0.dataset.letter != undefined) ||
@@ -104,7 +145,6 @@ const Gameboard = (() => {
             (cell2.dataset.letter == cell5.dataset.letter && cell5.dataset.letter == cell8.dataset.letter && cell2.dataset.letter != undefined) ||
             (cell0.dataset.letter == cell4.dataset.letter && cell4.dataset.letter == cell8.dataset.letter && cell0.dataset.letter != undefined) ||
             (cell2.dataset.letter == cell4.dataset.letter && cell4.dataset.letter == cell6.dataset.letter && cell2.dataset.letter != undefined)) {
-            console.log(turn)
                 return turn
 
         } else if (clickBoardCounter == 9) {
@@ -126,32 +166,35 @@ const Gameboard = (() => {
         document.querySelector('dialog').open = true
     }
 
+    const displayMove = (cell, turn) => {
+        cell.innerHTML = turn
+        cell.dataset.letter = turn
+    }
+
     const renderPlay = function (Player1, Player2, ...PlayersTypes) {
         drawBoard()
         gameboard.forEach((cell) => {
             cell.addEventListener('click', () => {
                 if (!gameOver) {
                     if (cell.innerHTML === '') {
-                        play()
-                        cell.innerHTML = turn
-                        cell.dataset.letter = turn
+                        decideTurn()
+                        displayMove(cell, turn)
                         clickBoardCounter++
-                        if (checkWin(Player1, Player2)== turn) {
-                            console.log(turn)
+                        if (checkWin()== turn) {
+                            console.log(turn, checkWin())
                             return winAction()
-                        } else if (checkWin(Player1, Player2) == 'Tie'){
+                        } else if (checkWin() == 'Tie'){
                             return tieAction()
                         }
                         if (PlayersTypes.includes('AI')) {
-                            play()
-                            randomCompMove()
-                            if (checkWin(Player1, Player2) == turn) {
+                            decideTurn()
+                            randomCompMove(Player1, Player2)
+                            if (checkWin() == turn) {
                                 return winAction()
-                            } else if (checkWin(Player1, Player2) == 'Tie'){
+                            } else if (checkWin() == 'Tie'){
                                 return tieAction()
                             }
                             clickBoardCounter++
-                            // minimax(cells, emptyCells.length, Player2)
                         }
                     }
                 }
