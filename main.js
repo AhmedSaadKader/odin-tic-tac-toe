@@ -33,6 +33,18 @@ const Gameboard = (() => {
       cell8 = document.getElementById("cell-8");
     }
   };
+
+  const getEmptyCells = () => {
+    emptyCells = [];
+    cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+      if (cell.innerHTML == "") {
+        emptyCells.push(cell);
+      }
+    });
+    return emptyCells;
+  };
+
   const decideTurn = () => {
     if (clickBoardCounter < 9) {
       clickBoardCounter % 2 == 0 ? (turn = "X") : (turn = "O");
@@ -45,13 +57,23 @@ const Gameboard = (() => {
   const bestCompMove = (Player1, Player2) => {
     let bestScore = -Infinity;
     let bestMove;
+    getEmptyCells();
+    if (emptyCells.length >= 8) {
+      if (emptyCells[4] == "") {
+        decideTurn();
+        return displayMove(emptyCells[4], turn);
+      } else {
+        decideTurn();
+        return displayMove(emptyCells[0], turn);
+      }
+    }
     for (let index = 0; index < cells.length; index++) {
       if (cells[index].innerHTML == "") {
         decideTurn();
         cells[index].dataset.letter = turn;
         cells[index].innerHTML = turn;
         clickBoardCounter++;
-        let score = minimax(cells, emptyCells.length, false);
+        let score = minimax(cells, cells.length, false);
         cells[index].removeAttribute("data-letter");
         cells[index].innerHTML = "";
         clickBoardCounter--;
@@ -65,17 +87,6 @@ const Gameboard = (() => {
     displayMove(bestMove, turn);
   };
 
-  const getEmptyCells = () => {
-    emptyCells = [];
-    cells = document.querySelectorAll(".cell");
-    cells.forEach((cell) => {
-      if (cell.innerHTML == "") {
-        emptyCells.push(cell);
-      }
-    });
-    return emptyCells;
-  };
-
   let scores = {
     X: -1,
     O: 1,
@@ -87,7 +98,6 @@ const Gameboard = (() => {
     console.log(result);
     if (result) {
       let score = scores[result];
-      console.log(score);
       return score;
     }
     if (isMaximizing) {
@@ -98,7 +108,7 @@ const Gameboard = (() => {
           cells[index].dataset.letter = turn;
           cells[index].innerHTML = turn;
           clickBoardCounter++;
-          let score = minimax(cells, emptyCells.length, false);
+          let score = minimax(cells, cells.length, false);
           cells[index].removeAttribute("data-letter");
           cells[index].innerHTML = "";
           decideTurn();
@@ -106,7 +116,6 @@ const Gameboard = (() => {
           bestScore = Math.max(score, bestScore);
         }
       }
-      console.log(bestScore);
       return bestScore;
     }
     if (!isMaximizing) {
@@ -125,12 +134,9 @@ const Gameboard = (() => {
           clickBoardCounter--;
         }
       }
-      console.log(bestScore);
       return bestScore;
     }
   };
-
-  const smartCompMove = () => {};
 
   const checkWin = () => {
     cells = document.querySelectorAll(".cell");
