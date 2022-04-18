@@ -59,9 +59,9 @@ const Gameboard = (() => {
     let bestMove;
     getEmptyCells();
     if (emptyCells.length >= 8) {
-      if (emptyCells[4] == "") {
+      if (cells[4].innerHTML == "") {
         decideTurn();
-        return displayMove(emptyCells[4], turn);
+        return displayMove(cells[4], turn);
       } else {
         decideTurn();
         return displayMove(emptyCells[0], turn);
