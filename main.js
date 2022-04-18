@@ -42,7 +42,7 @@ const Gameboard = (() => {
     }
   };
 
-  const randomCompMove = (Player1, Player2) => {
+  const bestCompMove = (Player1, Player2) => {
     let bestScore = -Infinity;
     let bestMove;
     for (let index = 0; index < cells.length; index++) {
@@ -203,7 +203,7 @@ const Gameboard = (() => {
             }
             if (PlayersTypes.includes("AI")) {
               decideTurn();
-              randomCompMove(Player1, Player2);
+              bestCompMove(Player1, Player2);
               if (checkWin() == turn) {
                 return winAction();
               } else if (checkWin() == "Tie") {
