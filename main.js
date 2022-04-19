@@ -95,7 +95,6 @@ const Gameboard = (() => {
 
   const minimax = (cells, arraylength, isMaximizing) => {
     let result = checkWin();
-    console.log(result);
     if (result) {
       let score = scores[result];
       return score;
@@ -194,6 +193,12 @@ const Gameboard = (() => {
 
   const renderPlay = function (Player1, Player2, ...PlayersTypes) {
     drawBoard();
+    getEmptyCells();
+    if (emptyCells.length == 9 && Player1.type == 'AI'){
+        displayMove(cell4, turn)
+        clickBoardCounter ++
+        decideTurn()
+    }
     gameboard.forEach((cell) => {
       cell.addEventListener("click", () => {
         if (!gameOver) {
@@ -202,7 +207,6 @@ const Gameboard = (() => {
             displayMove(cell, turn);
             clickBoardCounter++;
             if (checkWin() == turn) {
-              console.log(turn, checkWin());
               return winAction();
             } else if (checkWin() == "Tie") {
               return tieAction();
