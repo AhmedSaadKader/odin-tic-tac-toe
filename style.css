@@ -3,7 +3,6 @@ body {
     /* margin: 0; */
     height: 95vh;
     display: flex;
-    background-color: #4070f4;
     /* color: white; */
 }
 
@@ -20,13 +19,13 @@ button {
 
 header h2 {
     text-align: center;
-    color: white;
+    /* color: white; */
 }
 
 .sidebar {
     margin-right: 6rem;
     margin-left: 2rem;
-    /* background-color: white; */
+    background-color: #4070f4;
     color: white;
     font-size: 1.25rem;
     padding: 0.75rem;
